@@ -14,13 +14,32 @@ fetchBreeds().then(data =>{
     console.log(err);
 });
 
-fetchCatByBreed('beng')
+select.addEventListener("click", handleSelect);
+function handleSelect(event) {
+    const breedId = event.target.value;
+
+    fetchCatByBreed(breedId).then(catData =>{
+        const {breeds, url} = catData;
+        const {description, name, temperament
+        } = breeds[0];
+        const catMarkup = `<img class=".cat-image" src="${url}" alt="${name}"><h1>${name}</h1><p>${description}</p><p><span>Temperament:</span> ${temperament}</p>`;
+        return catInfo.innerHTML = catMarkup;
+    })
+};
+
+// fetchCatByBreed('beng').then(catData =>{
+//     const {breeds, url} = catData;
+//     const {description, name, temperament
+//     } = breeds[0];
+//     console.log(temperament);
+//     console.log(url);
+// })
 
 
 
 
 
-
+/* <img class=".cat-image" src="${url}" alt="${name}"><h1>${name}</h1><p>${description}</p><p><span>Temperament:</span> ${temperament}</p> */
 
 
 // 1. Створюю рефси
