@@ -24,12 +24,11 @@ select.addEventListener("change", handleSelect);
 function handleSelect(event) {
     const breedId = event.target.value;
     loader.classList.remove(hiddenClass);
-    // if(catInfo){
-    //     catInfo.add(hiddenClass);
-    // }
+    catInfo.classList.add(hiddenClass);
 
     fetchCatByBreed(breedId).then(catData =>{
         loader.classList.add(hiddenClass);
+        catInfo.classList.remove(hiddenClass);
 
         const {breeds, url} = catData;
         const {description, name, temperament
