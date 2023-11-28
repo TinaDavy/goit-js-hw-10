@@ -36,12 +36,3 @@ function handleSelect(event) {
 // })
 
 
-
-
-
-/* <img class=".cat-image" src="${url}" alt="${name}"><h1>${name}</h1><p>${description}</p><p><span>Temperament:</span> ${temperament}</p> */
-
-
-// 1. Створюю рефси
-// 2. Робимо запит на сервер через ф-ю Фетчбрідс:
-// 2.1. Використовуємо бібліотеку аксіос для гет запиту на сервер
