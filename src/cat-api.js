@@ -3,10 +3,6 @@ axios.defaults.headers.common["x-api-key"] = "live_ARF9TnDvEhxr8vH5wRuD1ZbXaqH3g
 
 function fetchBreeds() {
     return axios.get('https://api.thecatapi.com/v1/breeds').then(({data}) => {
-        // const breeds = data.map(element => {
-        //     return element.id
-        // });
-        console.log(data)
         return data;
     })
     .catch((err) =>
@@ -19,12 +15,13 @@ function fetchBreeds() {
 function fetchCatByBreed(breedId){
     return axios.get(`https://api.thecatapi.com/v1/images/search?breed_ids=${breedId}`).then(({data}) => {
         const catData = data[0]
-        console.log(catData)
         return catData;
     })
+    .catch((err) =>
+    {
+        console.log(err);
+    });
 };
 
 
 export {fetchBreeds, fetchCatByBreed};
-
-// data => console.log(data)

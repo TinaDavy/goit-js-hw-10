@@ -5,6 +5,10 @@ import {fetchBreeds, fetchCatByBreed} from "./cat-api";
 
 const select = document.querySelector(".breed-select");
 const catInfo = document.querySelector(".cat-info");
+const loader = document.querySelector(".loader");
+const error = document.querySelector(".error")
+const hiddenClass = "hidden";
+
 
 fetchBreeds().then(data =>{
     const selectMarkup = data.map(cat => `<option value="${cat.id}">${cat.name}</option>`);
@@ -12,26 +16,29 @@ fetchBreeds().then(data =>{
 }).catch((err) =>
 {
     console.log(err);
+    error.classList.remove(hiddenClass);
+    select.classList.add(hiddenClass);
 });
 
 select.addEventListener("change", handleSelect);
 function handleSelect(event) {
     const breedId = event.target.value;
+    loader.classList.remove(hiddenClass);
+    // if(catInfo){
+    //     catInfo.add(hiddenClass);
+    // }
 
     fetchCatByBreed(breedId).then(catData =>{
+        loader.classList.add(hiddenClass);
+
         const {breeds, url} = catData;
         const {description, name, temperament
         } = breeds[0];
         const catMarkup = `<img class="cat-image" src="${url}" alt="${name}"><div class="cat-descr"><h1 class="cat-name">${name}</h1><p>${description}</p><p><span class="cat-features">Temperament:</span> ${temperament}</p></div>`;
         return catInfo.innerHTML = catMarkup;
+    }).catch((err) => {
+        console.log(err)
+        error.classList.remove(hiddenClass);
     })
 };
-
-// fetchCatByBreed('beng').then(catData =>{
-//     const {breeds, url} = catData;
-//     const {description, name, temperament
-//     } = breeds[0];
-//     console.log(temperament);
-//     console.log(url);
-// })
 
