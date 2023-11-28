@@ -14,7 +14,7 @@ fetchBreeds().then(data =>{
     console.log(err);
 });
 
-select.addEventListener("click", handleSelect);
+select.addEventListener("change", handleSelect);
 function handleSelect(event) {
     const breedId = event.target.value;
 
@@ -22,7 +22,7 @@ function handleSelect(event) {
         const {breeds, url} = catData;
         const {description, name, temperament
         } = breeds[0];
-        const catMarkup = `<img class=".cat-image" src="${url}" alt="${name}"><h1>${name}</h1><p>${description}</p><p><span>Temperament:</span> ${temperament}</p>`;
+        const catMarkup = `<img class="cat-image" src="${url}" alt="${name}"><div class="cat-descr"><h1 class="cat-name">${name}</h1><p>${description}</p><p><span class="cat-features">Temperament:</span> ${temperament}</p></div>`;
         return catInfo.innerHTML = catMarkup;
     })
 };
