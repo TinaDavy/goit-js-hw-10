@@ -9,8 +9,13 @@ const loader = document.querySelector(".loader");
 const error = document.querySelector(".error")
 const hiddenClass = "hidden";
 
+loader.classList.remove(hiddenClass);
+select.classList.add(hiddenClass);
 
 fetchBreeds().then(data =>{
+    loader.classList.add(hiddenClass);
+    select.classList.remove(hiddenClass);
+
     const selectMarkup = data.map(cat => `<option value="${cat.id}">${cat.name}</option>`);
     return select.innerHTML = selectMarkup.join('');
 }).catch((err) =>
@@ -25,10 +30,12 @@ function handleSelect(event) {
     const breedId = event.target.value;
     loader.classList.remove(hiddenClass);
     catInfo.classList.add(hiddenClass);
+    error.classList.add(hiddenClass);
 
     fetchCatByBreed(breedId).then(catData =>{
         loader.classList.add(hiddenClass);
         catInfo.classList.remove(hiddenClass);
+        error.classList.add(hiddenClass);
 
         const {breeds, url} = catData;
         const {description, name, temperament
@@ -38,6 +45,7 @@ function handleSelect(event) {
     }).catch((err) => {
         console.log(err)
         error.classList.remove(hiddenClass);
+        catInfo.classList.add(hiddenClass);
     })
 };
 
